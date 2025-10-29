@@ -11,31 +11,31 @@ function fetchUser() {
     data: {
       user: {
         name: 'Joseph Oliveira',
-        github: 'https://github.com/josepholiveira'
+        linkGitHubProfile: 'https://github.com/josepholiveira'
       }
     }
   }
 }
 
 export function UserProfile() {
-  const [shouldNotRenderUserName, setShouldNotRenderUserName] = useState(false)
+  const [isLoadingUserData, setisLoadingUserData] = useState(false)
   const [userData, setUserData] = useState<User>()
 
   useEffect(() => {
     function loadUser() {
-      setShouldNotRenderUserName(true)
+      setisLoadingUserData(true)
 
       const fetchUserResponse = fetchUser()
 
       setUserData(fetchUserResponse.data.user)
       
-      setShouldNotRenderUserName(false)
+      setisLoadingUserData(false)
     }
 
     loadUser()
   })
 
-  if (shouldNotRenderUserName) {
+  if (isLoadingUserData) {
     return <p>Loading...</p>
   }
 
